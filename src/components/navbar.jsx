@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import {
   MDBContainer,
   MDBNavbar,
@@ -7,22 +8,24 @@ import {
   MDBIcon,
   MDBNavbarNav,
   MDBNavbarItem,
-  MDBNavbarLink,
-  MDBBtn,
   MDBDropdown,
   MDBDropdownToggle,
   MDBDropdownMenu,
   MDBDropdownItem,
   MDBCollapse,
+  MDBBtn
 } from 'mdb-react-ui-kit';
-import { ShoppingCart } from "phosphor-react";
+import { ShoppingCart } from 'phosphor-react';
+
 export const Navbar = () => {
   const [showBasic, setShowBasic] = useState(false);
 
   return (
-    <MDBNavbar expand='lg' dark style={{ background: `black` }} className='fixed-top'>
-      <MDBContainer fluid >
-        <MDBNavbarBrand href='/'>VALUPIK</MDBNavbarBrand>
+    <MDBNavbar expand='lg' dark style={{ background: 'black' }} className='fixed-top'>
+      <MDBContainer fluid>
+        <MDBNavbarBrand as={NavLink} to='/'>
+          VALUPIK
+        </MDBNavbarBrand>
 
         <MDBNavbarToggler
           aria-controls='navbarSupportedContent'
@@ -34,52 +37,60 @@ export const Navbar = () => {
         </MDBNavbarToggler>
 
         <MDBCollapse navbar show={showBasic}>
-          <MDBNavbarNav className='align-items-center  justify-content-center mb-2 mb-lg-0 '>
+          <MDBNavbarNav className='align-items-center justify-content-center mb-2 mb-lg-0'>
+            <MDBNavbarItem>
+              <NavLink className='nav-link' exact to='/'>
+                Home
+              </NavLink>
+            </MDBNavbarItem>
 
             <MDBNavbarItem>
-              <MDBNavbarLink aria-current='page' href='/'>
-                Home
-              </MDBNavbarLink>
-            </MDBNavbarItem>
-            <MDBNavbarLink href='/about'>
+              <NavLink className='nav-link' to='/about'>
                 About
-              </MDBNavbarLink>
+              </NavLink>
+            </MDBNavbarItem>
+
             <MDBNavbarItem>
-              <MDBNavbarLink href='/contact'>Contact</MDBNavbarLink>
+              <NavLink className='nav-link' to='/contact'>
+                Contact
+              </NavLink>
             </MDBNavbarItem>
 
             <MDBNavbarItem>
               <MDBDropdown>
                 <MDBDropdownToggle tag='a' className='nav-link' role='button'>
-                Shop
+                  Shop
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
-                  <MDBDropdownItem href='/mens'  link>Mens</MDBDropdownItem>
-                  <MDBDropdownItem href='/womens' link>Womens </MDBDropdownItem>
-                  <MDBDropdownItem href='/kids' link>Kids</MDBDropdownItem>
+                  <MDBDropdownItem as={NavLink} to='/mens' link>
+                    Mens
+                  </MDBDropdownItem>
+                  <MDBDropdownItem as={NavLink} to='/womens' link>
+                    Womens
+                  </MDBDropdownItem>
+                  <MDBDropdownItem as={NavLink} to='/kids' link>
+                    Kids
+                  </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavbarItem>
-        
 
             <MDBNavbarItem>
-              <MDBNavbarLink href='/cart'>
+              <NavLink className='nav-link' to='/cart'>
                 <ShoppingCart size={32} />
-              </MDBNavbarLink>
+              </NavLink>
             </MDBNavbarItem>
-
 
             <MDBNavbarItem className='d-flex justify-content-center'>
-              <MDBNavbarLink href='/login'>
-                <MDBBtn rippleColor='white'  color='info'   style={{backgroundColor:`transparant !important`, border:`3px solid white`, position:'relative'}}>
-                Login / Register
+              <NavLink className='nav-link' to='/login'>
+                <MDBBtn rippleColor='white' color='info' style={{ backgroundColor: `transparent !important`, border: `3px solid white`, position: 'relative' }}>
+                  Login / Register
                 </MDBBtn>
-              </MDBNavbarLink>
+              </NavLink>
             </MDBNavbarItem>
-          
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>
   );
-}
+};
